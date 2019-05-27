@@ -1,0 +1,68 @@
+
+{% extends 'base2.html.twig' %}
+
+
+ {% block cssBlock  %}
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+ {% endblock cssBlock %}
+
+
+{% block titlePage  %} Liste des Categories {% endblock %}
+
+{% block titlePath  %} Liste des Categories{% endblock %}
+{% block SmaltitlePage  %} Inventaire {% endblock %}
+{% block body  %}
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3>Liste des Categories</h3>
+            <div class="pull-right">
+                <a href="NewCategorie" class="btn btn-primary "><i class="fa fa-plus"> Ajouter une Categorie</i></a>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">INTITULER</th>
+                    <th scope="col">ACTION </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for categorie in listeCategorie %}
+                    <tr>
+                        <th scope="row">{{ categorie.id }}.</th>
+                        <td>{{ categorie.libCat }}</td>
+
+                        <td>
+                            <a href="/EditeCategorie/{{ categorie.id }}" type="button" class="btn btn-success">Editer</a>
+                            
+                             <form method="post" action="/categorie/{{ categorie.id }}" style="display:inline-block">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{%  endblock %}
+
+{% block scriptBlock  %}
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#example1').DataTable();
+        } );
+    </script>
+
+{% endblock scriptBlock %}
+

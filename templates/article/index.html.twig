@@ -1,0 +1,80 @@
+
+{% extends 'base2.html.twig' %}
+
+
+ {% block cssBlock  %}
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+ {% endblock cssBlock %}
+
+
+{% block titlePage  %} Liste des Articles {% endblock %}
+
+{% block titlePath  %} Liste des Articles{% endblock %}
+{% block SmaltitlePage  %} Inventaire {% endblock %}
+{% block body  %}
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3>Liste des Articles</h3>
+            <div class="pull-right">
+                <a href="NewArticle" type="button" class="btn btn-primary "><i class="fa fa-plus"> Ajouter un Article</i></a>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">CATEGORIE</th>
+                    <th scope="col">DESCRIPSTION</th>
+                    <th scope="col">ETAT</th>
+                    <th scope="col">QUANTITER</th>
+                    <th scope="col">QUANTITER SEUIL </th>
+                    <th scope="col">ACTION </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in listArticle %}
+                    <tr>
+                        <th scope="row">{{ article.id }}.</th>
+                        {% for categorie in listCategorie %}
+                            {% if article.idCat == categorie.id %}
+                                <td>{{ categorie.libCat }}</td>
+                            {% endif %}
+                         {% endfor %}
+                        <td>{{ article.desArt }}</td>
+                        <td>{{ article.etatArt }}</td>
+                        <td>{{ article.qteArt }}</td>
+                        <td>{{ article.qteSeilMin }}</td>
+
+                        <td>
+                            <a href="/EditeArticle/{{ article.id }}" type="button" class="btn btn-success">Editer</a>
+
+                            <form method="post" action="/article/{{ article.id }}" style="display:inline-block">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{%  endblock %}
+
+{% block scriptBlock  %}
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#example1').DataTable();
+        } );
+    </script>
+
+{% endblock scriptBlock %}
+
