@@ -66,7 +66,15 @@ class ArticleController extends AbstractController
      */
     public function edit(Article $article , Request $req)
     {
-        $form = $this->createForm(ArticleType::class, $article);
+        $categorie = $this->repCat->findAll();
+        $choices = [];
+        
+        foreach ($categorie as $p)
+        {
+            $choices[$p->getLibCat()] = $p->getId();
+        }
+
+        $form = $this->createForm(ArticleType::class, $article, array('abbrChoices' => $choices));
 
         $form->handleRequest($req);
 

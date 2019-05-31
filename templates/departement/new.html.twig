@@ -1,0 +1,43 @@
+
+{% extends 'base2.html.twig' %}
+
+
+ {% block cssBlock  %}
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+ {% endblock cssBlock %}
+
+
+{% block titlePage  %} Liste des Departement {% endblock %}
+
+{% block titlePath  %} Liste des Departement{% endblock %}
+{% block SmaltitlePage  %} Inventaire {% endblock %}
+{% block body  %}
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3>Nouvel Departement</h3>
+        </div>
+
+        <div class="box-body">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary "><i class="fa fa-plus"> Ajouter </i></button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{%  endblock %}
+
+{% block scriptBlock  %}
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+    <script>
+        $(document).ready( function () 
+        {
+            $('#example1').DataTable();
+        } );
+    </script>
+
+{% endblock scriptBlock %}
+

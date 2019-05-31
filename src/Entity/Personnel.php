@@ -46,6 +46,11 @@ class Personnel
      */
     private $fonc;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $idDep;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +124,18 @@ class Personnel
     public function setFonc(string $fonc): self
     {
         $this->fonc = $fonc;
+
+        return $this;
+    }
+
+    public function getIdDep(): ?int
+    {
+        return $this->idDep;
+    }
+
+    public function setIdDep(int $idDep): self
+    {
+        $this->idDep = $idDep;
 
         return $this;
     }

@@ -1,0 +1,84 @@
+
+{% extends 'base2.html.twig' %}
+
+
+ {% block cssBlock  %}
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+ {% endblock cssBlock %}
+
+
+{% block titlePage  %} Liste du personnel {% endblock %}
+
+{% block titlePath  %} Liste du personnel{% endblock %}
+{% block SmaltitlePage  %} Inventaire {% endblock %}
+{% block body  %}
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3>Liste du personnel</h3>
+            <div class="pull-right">
+                <a href="NewPersonnel" type="button" class="btn btn-primary "><i class="fa fa-plus"> Ajouter une personne</i></a>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">DEPARTEMENT</th>
+                    <th scope="col">NOM</th>
+                    <th scope="col">PRENOM</th>
+                    <th scope="col">TEL</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">ADRESSE</th>
+                    <th scope="col">FONCTION </th>
+                    <th scope="col">ACTION</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for personne in listpersonnel %}
+                    <tr>
+                        <th scope="row">{{ personne.id }}.</th>
+                         {% for depatement in listdepartement %}
+                            {% if personne.idDep == depatement.id %}
+                                <td>{{ depatement.libDept }}</td>
+                            {% endif %}
+                         {% endfor %}
+                        <td>{{ personne.nom }}</td>
+                        <td>{{ personne.prenom }}</td>
+                        <td>{{ personne.tel }}</td>
+                        <td>{{ personne.email }}</td>
+                        <td>{{ personne.adresse }}</td>
+                        <td>{{ personne.fonc }}</td>
+
+                        <td>
+                            <a href="/EditePersonnel/{{ personne.id }}" type="button" class="btn btn-success">Editer</a>
+
+                            <form method="post" action="/personnel/{{ personne.id }}" style="display:inline-block">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{%  endblock %}
+
+{% block scriptBlock  %}
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#example1').DataTable();
+        } );
+    </script>
+
+{% endblock scriptBlock %}
+

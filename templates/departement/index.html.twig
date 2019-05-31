@@ -7,17 +7,17 @@
  {% endblock cssBlock %}
 
 
-{% block titlePage  %} Liste des Departements {% endblock %}
+{% block titlePage  %} Liste des departements {% endblock %}
 
-{% block titlePath  %} Liste des Departements {% endblock %}
-{% block SmaltitlePage  %} service {% endblock %}
+{% block titlePath  %} Liste des departements {% endblock %}
+{% block SmaltitlePage  %} Inventaire {% endblock %}
 {% block body  %}
 
     <div class="box">
         <div class="box-header with-border">
-            <h3>Departements</h3>
+            <h3>Liste des departements</h3>
             <div class="pull-right">
-                <a href="NewPersonnel" type="button" class="btn btn-primary "><i class="fa fa-plus"> Ajouter un Departement </i></a>
+                <a href="NewDepartement" type="button" class="btn btn-primary "><i class="fa fa-plus"> Ajouter un departement </i></a>
             </div>
         </div>
 
@@ -26,7 +26,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Departement/Services</th>
+                    <th scope="col">Departements / Services </th>
                     <th scope="col">ACTION</th>
                 </tr>
                 </thead>
@@ -34,9 +34,10 @@
                 {% for departement in listdepartement %}
                     <tr>
                         <th scope="row">{{ departement.id }}.</th>
-                        <td>{{ departement.lib_dept }}</td>
+                        <td>{{ departement.libDept }}</td>
+
                         <td>
-                            <a href="/EditeDepartement/{{ departement.id  }}" type="button" class="btn btn-success">Editer</a>
+                            <a href="/EditeDepartement/{{ departement.id }}" type="button" class="btn btn-success">Editer</a>
 
                             <form method="post" action="/departement/{{ departement.id }}" style="display:inline-block">
                                 <input type="hidden" name="_method" value="DELETE">
